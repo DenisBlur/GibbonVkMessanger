@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GibbonVk.Pages;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -53,7 +54,7 @@ namespace GibbonVk
             if (!localSettingSwitch.IsOn)
             {
                 WebPanel.Visibility = Visibility.Visible;
-                Uri uriVKAuth = new Uri("https://oauth.vk.com/authorize?client_id=6044506&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope=friends,photos&response_type=token" + __VKAPI);
+                Uri uriVKAuth = new Uri("https://oauth.vk.com/authorize?client_id=6044506&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope=friends,messages,photos&response_type=token" + __VKAPI);
                 AuthWebView.Navigate(uriVKAuth);
             }
             else
@@ -62,7 +63,8 @@ namespace GibbonVk
                 {
                     _Token = localSettings.Values["main_token"].ToString();
                     _UserID = localSettings.Values["main_user_id"].ToString();
-                    Content.Navigate(typeof(UserPage), null, new DrillInNavigationTransitionInfo());
+                    NavView.IsPaneToggleButtonVisible = true;
+                    Content.Navigate(typeof(MessagesPage), null, new DrillInNavigationTransitionInfo());
                 }
             }
 
@@ -82,7 +84,7 @@ namespace GibbonVk
             localSettings.Values["main_user_id"] = _UserID;
             //_UserID = "176117354";
 
-            Content.Navigate(typeof(UserPage), null, new DrillInNavigationTransitionInfo());
+            Content.Navigate(typeof(MessagesPage), null, new DrillInNavigationTransitionInfo());
 
         }
     }

@@ -2,6 +2,134 @@
     x:Class="GibbonVk.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:local="using:GibbonVk">
+    <Application.Resources>
+        <DataTemplate x:Key="MessageDataTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Ellipse VerticalAlignment="Bottom" Margin="0,0,8,0" Height="26" Width="26">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding imageUrl}" />
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Border CornerRadius="16" Background="{StaticResource SystemAccentColor}">
+                    <TextBlock MaxWidth="300" TextWrapping="Wrap" Margin="8" Foreground="White" FontWeight="Bold" Text="{Binding text}"/>
+                </Border>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="SelfMessageDataTemplate">
+            <Grid>
+                <StackPanel MaxWidth="300" HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Border CornerRadius="16" Grid.Row="0" HorizontalAlignment="Right"  Background="{StaticResource SystemAccentColorDark2}">
+                        <TextBlock TextWrapping="Wrap" Margin="8" Foreground="White" FontWeight="Light" Text="{Binding text}"/>
+                    </Border>
+                    <Ellipse VerticalAlignment="Bottom" Margin="8,0,0,0" Height="26" Width="26">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="{Binding imageUrl}" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="StickerMessageDataTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Ellipse VerticalAlignment="Bottom" Margin="0,0,8,0" Height="26" Width="26">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding imageUrl}" />
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Border Height="200" Width="200"  CornerRadius="16" >
+                    <Image Height="200" Width="200" Source="{Binding attachmentsHistories[0].sticker.images[2].url}"/>
+                </Border>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="SelfStickerMessageDataTemplate">
+            <Grid>
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Border Height="200" Width="200"  CornerRadius="16" >
+                        <Image Height="200" Width="200" Source="{Binding attachmentsHistories[0].sticker.images[2].url}"/>
+                    </Border>
+                    <Ellipse VerticalAlignment="Bottom" Margin="8,0,0,0" Height="26" Width="26">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="{Binding imageUrl}" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="PhotoMessageDataTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Ellipse VerticalAlignment="Bottom" Margin="0,0,8,0" Height="26" Width="26">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding imageUrl}" />
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Border Background="{StaticResource SystemAccentColor}" CornerRadius="16" >
+                    <Image Source="{Binding attachmentsHistories[0].photo.sizes[3].url}"/>
+                </Border>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="SelfPhotoMessageDataTemplate">
+            <Grid>
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Border Background="{StaticResource SystemAccentColor}" CornerRadius="16" >
+                        <Image Source="{Binding attachmentsHistories[0].photo.sizes[3].url}"/>
+                    </Border>
+                    <Ellipse VerticalAlignment="Bottom" Margin="8,0,0,0" Height="26" Width="26">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="{Binding imageUrl}" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="PhotoGridMessageDataTemplate">
+            <Grid>
+                <StackPanel Orientation="Horizontal">
+                    <Ellipse VerticalAlignment="Bottom" Margin="0,0,8,0" Height="26" Width="26">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="{Binding imageUrl}" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <Grid>
+                        <controls:AdaptiveGridView ItemsSource="{Binding attachmentsHistories}" OneRowModeEnabled="false" ItemHeight="100" SelectionMode="None" MaxWidth="400" DesiredWidth="200">
+                            <controls:AdaptiveGridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="{StaticResource SystemAccentColor}" CornerRadius="8" >
+                                        <Image HorizontalAlignment="Center" Stretch="UniformToFill" Source="{Binding Path=photo.sizes[2].url}"/>
+                                    </Border>
+                                </DataTemplate>
+                            </controls:AdaptiveGridView.ItemTemplate>
+                        </controls:AdaptiveGridView>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="SelfPhotoGridMessageDataTemplate">
+            <Grid>
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Grid>
+                        <controls:AdaptiveGridView ItemsSource="{Binding attachmentsHistories}" OneRowModeEnabled="false" ItemHeight="100" SelectionMode="None" MaxWidth="400" DesiredWidth="200">
+                            <controls:AdaptiveGridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="{StaticResource SystemAccentColor}" CornerRadius="8" >
+                                        <Image HorizontalAlignment="Center" Stretch="UniformToFill" Source="{Binding Path=photo.sizes[2].url}"/>
+                                    </Border>
+                                </DataTemplate>
+                            </controls:AdaptiveGridView.ItemTemplate>
+                        </controls:AdaptiveGridView>
+                    </Grid>
+                    <Ellipse VerticalAlignment="Bottom" Margin="8,0,0,0" Height="26" Width="26">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="{Binding imageUrl}" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+        <local:MessageItemDataTemplateSelector x:Key="MessageItemDataTemplateSelector"/>
+    </Application.Resources>
+
+
 
 </Application>

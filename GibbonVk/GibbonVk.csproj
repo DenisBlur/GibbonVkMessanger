@@ -122,10 +122,21 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MessageItemDataTemplateSelector .cs" />
+    <Compile Include="Models\Conversation.cs" />
+    <Compile Include="Models\ConversationsModel.cs" />
+    <Compile Include="Models\History.cs" />
+    <Compile Include="Models\HistoryModel.cs" />
+    <Compile Include="Models\LongPollAnswer.cs" />
+    <Compile Include="Models\LongPollServerWrapper.cs" />
+    <Compile Include="Models\MessangerFacade.cs" />
     <Compile Include="Models\PhotoModel.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Pages\MessagesPage.xaml.cs">
+      <DependentUpon>MessagesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserPage.xaml.cs">
+    <Compile Include="Pages\UserPage.xaml.cs">
       <DependentUpon>UserPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -153,14 +164,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserPage.xaml">
+    <Page Include="Pages\MessagesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\UserPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.2.9</Version>
+      <Version>6.2.10</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit">
       <Version>6.0.0</Version>

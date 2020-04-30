@@ -36,6 +36,23 @@ namespace GibbonVk
             this.InitializeComponent();
             GetUserInfo();
             GetUserPhotos();
+            GetConversations();
+        }
+
+        private async Task GetConversations()
+        {
+            HttpClient httpClient = new HttpClient();
+            HttpResponseMessage httpResponse = new HttpResponseMessage();
+            Uri requestUri = new Uri("https://api.vk.com/method/messages.getConversations?count=20" +
+                "&filter=all" +
+                "&access_token=" +
+                _Token + __VKAPI);
+
+            httpResponse = await httpClient.GetAsync(requestUri);
+            httpResponse.EnsureSuccessStatusCode();
+            string resultResponse = await httpResponse.Content.ReadAsStringAsync();
+
+            testSend.Text = resultResponse;
         }
 
         private async Task GetUserPhotos()
