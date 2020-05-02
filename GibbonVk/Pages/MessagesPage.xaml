@@ -36,8 +36,9 @@
             </ListBox>
         </ScrollViewer>
         <Grid Grid.Column="1">
+
             <controls:DockPanel x:Name="SampleDockPanel"
-                          Background="LightGray" 
+                          
                           LastChildFill="True" 
                           Padding="0,0,0,0">
                 <Border CornerRadius="8" controls:DockPanel.Dock="Bottom">
@@ -45,9 +46,9 @@
                         <TextBox CornerRadius="8" KeyDown="TextBox_KeyDown"/>
                     </StackPanel>
                 </Border>
-                <ListView Name="listHistory" SelectionMode="None" ItemTemplateSelector="{StaticResource MessageItemDataTemplateSelector}" Background="White">
+                <ListView SelectionMode="None" Name="listHistory"  ItemTemplateSelector="{StaticResource MessageItemDataTemplateSelector}">
                     <ListView.Header>
-                        <Grid  Background="{StaticResource SystemControlAcrylicElementBrush}">
+                        <Grid Background="{StaticResource SystemControlAltLowAcrylicElementBrush}">
                             <controls:ScrollHeader Mode="Sticky">
                                 <StackPanel Orientation="Horizontal">
                                     <Ellipse Width="36" Height="36" Margin="8">

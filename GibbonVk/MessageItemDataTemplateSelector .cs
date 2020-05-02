@@ -23,6 +23,8 @@ namespace GibbonVk
                         {
                             case "sticker":
                                 return App.Current.Resources["StickerMessageDataTemplate"] as DataTemplate;
+                            case "audio_message":
+                                return App.Current.Resources["AudioMessageDataTemplate"] as DataTemplate;
                             case "photo":
                                 if ((item as HistoryModel).attachmentsHistories.Count > 1)
                                 {
@@ -43,6 +45,8 @@ namespace GibbonVk
                         {
                             case "sticker":
                                 return App.Current.Resources["SelfStickerMessageDataTemplate"] as DataTemplate;
+                            case "audio_message":
+                                return App.Current.Resources["SelfAudioMessageDataTemplate"] as DataTemplate;
                             case "photo":
                                  if ((item as HistoryModel).attachmentsHistories.Count > 1)
                                 {

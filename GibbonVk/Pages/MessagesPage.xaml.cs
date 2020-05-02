@@ -22,6 +22,7 @@ using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using Windows.UI.Xaml.Media.Imaging;
 using System.Numerics;
+using Windows.Media.Core;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -139,7 +140,7 @@ namespace GibbonVk.Pages
                 }
                 historyModels.Add(historyModel);
             }
-            listHistory.ItemsSource = historyModels;
+            listHistory.ItemsSource = historyModels.Reverse();
         }
 
         private async Task GetConversations()
@@ -216,6 +217,13 @@ namespace GibbonVk.Pages
                 e.Handled = true;
                 var text = (sender as TextBox).Text;
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MediaPlayerElement player = new MediaPlayerElement();
+            player.Source = MediaSource.CreateFromUri(new Uri("https://psv4.userapi.com/c205316//u300675947/audiomsg/d12/b1e9c83095.ogg"));
+            player.MediaPlayer.Play();
         }
     }
 }

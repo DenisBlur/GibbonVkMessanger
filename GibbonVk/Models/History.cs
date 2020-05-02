@@ -27,11 +27,20 @@ namespace GibbonVk.Models
         public List<SizesPhotosHistory> sizes { get; set; }
     }
 
+    public class AudioMessageHistory
+    {
+        public int id { get; set; }
+        public int owner_id { get; set; }
+        public int duration { get; set; }
+        public string link_mp3 { get; set; }
+    }
+
     public class AttachmentsHistory
     {
         public string type { get; set; }
         public StickerHistory sticker { get; set; }
         public PhotoHistory photo { get; set; }
+        public AudioMessageHistory audio_message { get; set; }
     }
 
     public class ItemHistory
