@@ -122,7 +122,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MessageItemDataTemplateSelector .cs" />
+    <Compile Include="Support\MessageItemDataTemplateSelector .cs" />
     <Compile Include="Models\Conversation.cs" />
     <Compile Include="Models\ConversationsModel.cs" />
     <Compile Include="Models\History.cs" />
@@ -142,8 +142,8 @@
     <Compile Include="Pages\UserPage.xaml.cs">
       <DependentUpon>UserPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RelayCommand.cs" />
-    <Compile Include="RelayCommandGenericType.cs" />
+    <Compile Include="Support\RelayCommand.cs" />
+    <Compile Include="Support\RelayCommandGenericType.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

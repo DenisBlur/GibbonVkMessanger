@@ -77,6 +77,7 @@ namespace GibbonVk.Pages
         private void UpdateTitleBarLayout(CoreApplicationViewTitleBar coreTitleBar)
         {
             // Update title bar control size as needed to account for system size changes.
+            Separator.Height = coreTitleBar.Height;
             AppTitleBar.Height = coreTitleBar.Height;
         }
 
@@ -167,6 +168,13 @@ namespace GibbonVk.Pages
                         friend.Online = 0;
                     }
                 }
+
+                if (friend.FullName == null)
+                {
+                    friend.FullName = "Беседы с батюшкой";
+                    friend.Photo100 = "https://pbs.twimg.com/media/ET64qNqXsAAVKzR.jpg";
+                }
+
                 conversationsModels.Add(friend);
             }
             listConversations.ItemsSource = conversationsModels;
@@ -196,6 +204,11 @@ namespace GibbonVk.Pages
             MediaPlayerElement player = new MediaPlayerElement();
             player.Source = MediaSource.CreateFromUri(new Uri("https://psv4.userapi.com/c205316//u300675947/audiomsg/d12/b1e9c83095.ogg"));
             player.MediaPlayer.Play();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

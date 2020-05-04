@@ -38,5 +38,6 @@
                 </ListView.ItemContainerStyle>
             </ListView>
         </controls:DockPanel>
+        <ProgressRing x:Name="progressRing" IsActive="True" />
     </Grid>
 </Page>

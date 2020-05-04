@@ -90,6 +90,7 @@ namespace GibbonVk.Pages
                 historyModels.Add(historyModel);
             }
             listHistory.ItemsSource = historyModels.Reverse();
+            progressRing.IsActive = false;
         }
     }
 }

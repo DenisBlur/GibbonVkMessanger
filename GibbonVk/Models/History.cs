@@ -35,12 +35,40 @@ namespace GibbonVk.Models
         public string link_mp3 { get; set; }
     }
 
+    public class WallHistory
+    {
+        public int id { get; set; }
+        public int from_id { get; set; }
+        public int to_id { get; set; }
+        public int date { get; set; }
+        public string post_type { get; set; }
+        public string text { get; set; }
+        public List<AttachmentsHistory> attachments { get; set; }
+    }
+
+    public class VideoHistory
+    {
+        public int can_comment { get; set; }
+        public int can_like { get; set; }
+        public int can_repost { get; set; }
+        public int can_subscribe { get; set; }
+        public int can_add_to_faves { get; set; }
+        public int can_add { get; set; }
+        public int comments { get; set; }
+        public int date { get; set; }
+        public string description { get; set; }
+        public int duration { get; set; }
+        public List<SizesPhotosHistory> image { get; set; }
+    }
+
     public class AttachmentsHistory
     {
         public string type { get; set; }
         public StickerHistory sticker { get; set; }
         public PhotoHistory photo { get; set; }
         public AudioMessageHistory audio_message { get; set; }
+        public WallHistory wall { get; set; }
+        public VideoHistory video { get; set; }
     }
 
     public class ReplyMessage
