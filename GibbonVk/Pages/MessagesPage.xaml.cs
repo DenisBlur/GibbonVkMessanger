@@ -23,6 +23,8 @@ using System.Collections.ObjectModel;
 using Windows.UI.Xaml.Media.Imaging;
 using System.Numerics;
 using Windows.Media.Core;
+using Windows.ApplicationModel.Core;
+using Windows.UI.Xaml.Media.Animation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -33,25 +35,49 @@ namespace GibbonVk.Pages
     /// </summary>
     public sealed partial class MessagesPage : Page
     {
-
         public ObservableCollection<LongPollAnswer> LongPollServerAnswer { get; set; }
         public ObservableCollection<LongPollServerResponse> LongPollServerInfo { get; set; }
         ObservableCollection<ConversationsModel> conversationsModels = new ObservableCollection<ConversationsModel>();
-        ObservableCollection<HistoryModel> historyModels = new ObservableCollection<HistoryModel>();
 
         public ConversationsModel friendList;
-        private string currentFriendID;
-        private string currentFriendPhoto;
-        private string currentFriendFIO;
 
         public MessagesPage()
         {
             this.InitializeComponent();
             LongPollServerInfo = new ObservableCollection<LongPollServerResponse>();
             LongPollServerAnswer = new ObservableCollection<LongPollAnswer>();
-            SampleDockPanel.Translation += new Vector3(0, 0, 32);
             _ = GetConversations();
 
+            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            coreTitleBar.ExtendViewIntoTitleBar = true;
+            UpdateTitleBarLayout(coreTitleBar);
+            Window.Current.SetTitleBar(AppTitleBar);
+            coreTitleBar.LayoutMetricsChanged += CoreTitleBar_LayoutMetricsChanged;
+            coreTitleBar.IsVisibleChanged += CoreTitleBar_IsVisibleChanged;
+
+        }
+
+        private void CoreTitleBar_LayoutMetricsChanged(CoreApplicationViewTitleBar sender, object args)
+        {
+            UpdateTitleBarLayout(sender);
+        }
+
+        private void CoreTitleBar_IsVisibleChanged(CoreApplicationViewTitleBar sender, object args)
+        {
+            if (sender.IsVisible)
+            {
+                AppTitleBar.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                AppTitleBar.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void UpdateTitleBarLayout(CoreApplicationViewTitleBar coreTitleBar)
+        {
+            // Update title bar control size as needed to account for system size changes.
+            AppTitleBar.Height = coreTitleBar.Height;
         }
 
         private async Task RunLongPollRequests()
@@ -71,25 +97,25 @@ namespace GibbonVk.Pages
                     Debug.WriteLine(update.ElementAt(0).ToString());
                     if (Convert.ToInt32(update.ElementAt(0)) == 4)
                     {
-                        if (currentFriendID == update.ElementAt(3).ToString())
-                        {
-                            HistoryModel history = new HistoryModel();
-                            history.date = Convert.ToInt32(update.ElementAt(3));
-                            history.text = update.ElementAt(6).ToString();
-                            history.from_id = Convert.ToInt32(update.ElementAt(3));
-                            if (update.ElementAt(3).ToString() == _UserID)
-                            {
-                                history.isSelf = true;
-                                history.imageUrl = "https://sun9-28.userapi.com/impg/c858132/v858132220/1db0dd/Z1zeI1bjQ_I.jpg?size=200x0&quality=90&sign=aec2bd4ee207db01b7b99a4036808533";
-                            }
-                            else
-                            {
-                                history.isSelf = false;
-                                history.imageUrl = currentFriendPhoto;
-                            }
-                            historyModels.Add(history);
+                        //if (currentFriendID == update.ElementAt(3).ToString())
+                        //{
+                        //    HistoryModel history = new HistoryModel();
+                        //    history.date = Convert.ToInt32(update.ElementAt(3));
+                        //    history.text = update.ElementAt(6).ToString();
+                        //    history.from_id = Convert.ToInt32(update.ElementAt(3));
+                        //    if (update.ElementAt(3).ToString() == _UserID)
+                        //    {
+                        //        history.isSelf = true;
+                        //        history.imageUrl = "https://sun9-28.userapi.com/impg/c858132/v858132220/1db0dd/Z1zeI1bjQ_I.jpg?size=200x0&quality=90&sign=aec2bd4ee207db01b7b99a4036808533";
+                        //    }
+                        //    else
+                        //    {
+                        //        history.isSelf = false;
+                        //        history.imageUrl = currentFriendPhoto;
+                        //    }
+                        //    historyModels.Add(history);
                             
-                        }
+                        //}
                         for (int i = 0; i < conversationsModels.Count(); i++)
                         {
                             ConversationsModel friend = conversationsModels[i];
@@ -103,44 +129,6 @@ namespace GibbonVk.Pages
                     }
                 }
             }
-        }
-
-        private async Task GetHistory(int user_id)
-        {
-            historyModels.Clear();
-            HttpClient httpClient = new HttpClient();
-            HttpResponseMessage httpResponse = new HttpResponseMessage();
-            Uri requestUri = new Uri("https://api.vk.com/method/messages.getHistory?count=30" +
-                "&user_id=" + user_id +
-                "&access_token=" +
-                _Token + __VKAPI);
-
-            httpResponse = await httpClient.GetAsync(requestUri);
-            httpResponse.EnsureSuccessStatusCode();
-            string resultResponse = await httpResponse.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<HistoryWrapper>(resultResponse);
-            foreach (var item in result.response.items)
-            {
-                HistoryModel historyModel = new HistoryModel();
-                historyModel.date = item.date;
-                historyModel.from_id = item.from_id;
-                historyModel.text = item.text;
-                if (item.from_id.ToString() == _UserID)
-                {
-                    historyModel.isSelf = true;
-                    historyModel.imageUrl = "https://sun9-28.userapi.com/impg/c858132/v858132220/1db0dd/Z1zeI1bjQ_I.jpg?size=200x0&quality=90&sign=aec2bd4ee207db01b7b99a4036808533";
-                } else
-                {
-                    historyModel.isSelf = false;
-                    historyModel.imageUrl = currentFriendPhoto;
-                }
-                if (item.attachments.Count != 0)
-                {
-                    historyModel.attachmentsHistories = item.attachments;
-                }
-                historyModels.Add(historyModel);
-            }
-            listHistory.ItemsSource = historyModels.Reverse();
         }
 
         private async Task GetConversations()
@@ -187,6 +175,7 @@ namespace GibbonVk.Pages
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             await RunLongPollRequests();
+            ShadowTheme.Receivers.Add(MessageFrame);
         }
 
 
@@ -197,26 +186,9 @@ namespace GibbonVk.Pages
             friendList = (ConversationsModel)item.SelectedItem;
             if (friendList != null)
             {
-                currentFriendID = friendList.PeerId.ToString();
-                currentFriendPhoto = friendList.Photo100.ToString();
-                currentFriendFIO = friendList.FullName.ToString();
-
-                BitmapImage bitmapImage = new BitmapImage();
-                bitmapImage.UriSource = new Uri(currentFriendPhoto);
-                dialogProfileName.ImageSource = bitmapImage;
-
-                _ = GetHistory(Convert.ToInt32(currentFriendID));
+                MessageFrame.Navigate(typeof(HistoryPage), friendList, new DrillInNavigationTransitionInfo());
             }
 
-        }
-
-        private void TextBox_KeyDown(object sender, KeyRoutedEventArgs e)
-        {
-            if (e.Key == Windows.System.VirtualKey.Enter)
-            {
-                e.Handled = true;
-                var text = (sender as TextBox).Text;
-            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

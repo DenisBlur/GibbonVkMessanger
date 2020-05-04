@@ -43,6 +43,14 @@ namespace GibbonVk.Models
         public AudioMessageHistory audio_message { get; set; }
     }
 
+    public class ReplyMessage
+    {
+        public int date { get; set; }
+        public int from_id { get; set; }
+        public string text { get; set; }
+        public List<AttachmentsHistory> attachments { get; set; }
+    }
+
     public class ItemHistory
     {
         public int date { get; set; }
@@ -52,6 +60,7 @@ namespace GibbonVk.Models
         public string text { get; set; }
         public int conversation_message_id { get; set; }
         public List<AttachmentsHistory> attachments { get; set; }
+        public ReplyMessage reply_message { get; set; }
     }
 
     public class ResponseHistory

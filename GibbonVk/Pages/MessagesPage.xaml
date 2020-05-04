@@ -5,75 +5,51 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     Loaded="Page_Loaded"
     xmlns:local="using:GibbonVk.Models"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     Background="{ThemeResource SystemControlAcrylicWindowMediumHighBrush}">
+    <Page.Resources>
+        <ThemeShadow x:Name="ShadowTheme"/>
+    </Page.Resources>
 
-    <Grid>
+    <Grid x:Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="400"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <StackPanel>
+            <Grid Grid.Row="0" Width="400" HorizontalAlignment="Left" x:Name="AppTitleBar" Background="Transparent">
+                <TextBlock Text="Chats" 
+                       Grid.Column="0" 
+                       FontWeight="Bold"
+                       Style="{StaticResource CaptionTextBlockStyle}" 
+                       Margin="16,8,8,8"/>
+            </Grid>
 
-        <ScrollViewer Grid.Column="0">
-            <ListBox x:Name="listConversations" SelectionChanged="listConversations_SelectionChanged" Background="Transparent">
-                <ListBox.ItemTemplate>
-                    <DataTemplate x:DataType="local:ConversationsModel">
-                        <StackPanel Orientation="Horizontal">
-                            <Ellipse Width="50" Height="50" Margin="0">
-                                <Ellipse.Fill>
-                                    <ImageBrush ImageSource="{x:Bind Photo100}"/>
-                                </Ellipse.Fill>
-                            </Ellipse>
-                            <StackPanel Margin="8,0,0,0">
-                                <TextBlock Text="{x:Bind FullName}" FontSize="14"/>
-                                <TextBlock Text="{x:Bind Message}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Foreground="Gray"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </ScrollViewer>
-        <Grid Grid.Column="1">
-
-            <controls:DockPanel x:Name="SampleDockPanel"
-                          
-                          LastChildFill="True" 
-                          Padding="0,0,0,0">
-                <Border CornerRadius="8" controls:DockPanel.Dock="Bottom">
-                    <StackPanel Margin="8">
-                        <TextBox CornerRadius="8" KeyDown="TextBox_KeyDown"/>
-                    </StackPanel>
-                </Border>
-                <ListView SelectionMode="None" Name="listHistory"  ItemTemplateSelector="{StaticResource MessageItemDataTemplateSelector}">
-                    <ListView.Header>
-                        <Grid Background="{StaticResource SystemControlAltLowAcrylicElementBrush}">
-                            <controls:ScrollHeader Mode="Sticky">
-                                <StackPanel Orientation="Horizontal">
-                                    <Ellipse Width="36" Height="36" Margin="8">
-                                        <Ellipse.Fill>
-                                            <ImageBrush x:Name="dialogProfileName" />
-                                        </Ellipse.Fill>
-                                    </Ellipse>
+            <ScrollViewer Grid.Column="0">
+                <ListBox x:Name="listConversations"  SelectionChanged="listConversations_SelectionChanged" Background="Transparent">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate x:DataType="local:ConversationsModel">
+                            <StackPanel Orientation="Horizontal">
+                                <Ellipse Width="50" Height="50" Margin="0">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="{x:Bind Photo100}"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <StackPanel Margin="8,0,0,0">
+                                    <TextBlock Text="{x:Bind FullName}" FontSize="14"/>
+                                    <TextBlock Text="{x:Bind Message}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Foreground="Gray"/>
                                 </StackPanel>
-                            </controls:ScrollHeader>
-                        </Grid>
-                    </ListView.Header>
-                    <ListView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <ItemsStackPanel ItemsUpdatingScrollMode="KeepLastItemInView"/>
-                        </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
-                            <Setter Property="Margin" Value="0,0,0,10"></Setter>
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                </ListView>
-            </controls:DockPanel>
-        </Grid>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
+        </StackPanel>
+        <Frame Grid.Column="1" Shadow="{StaticResource ShadowTheme}" Translation="0,0,64" x:Name="MessageFrame" Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
 
+            <TextBlock Text="Выберите диалог" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Frame>
     </Grid>
 </Page>

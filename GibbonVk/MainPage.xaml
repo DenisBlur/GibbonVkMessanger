@@ -9,24 +9,19 @@
     Background="{ThemeResource SystemControlChromeHighAcrylicWindowMediumBrush}">
 
     <Grid>
-        <NavigationView x:Name="NavView" PaneDisplayMode="LeftMinimal" IsPaneOpen="False" IsPaneToggleButtonVisible="False" IsBackButtonVisible="Collapsed" Background="{ThemeResource SystemControlChromeHighAcrylicWindowMediumBrush}">
-            <NavigationView.MenuItems>
-                <NavigationViewItem Tag="home" Icon="Contact" Content="Profile"/>
-            </NavigationView.MenuItems>
-            <Frame x:Name="Content">
-                <Grid>
-                    <RelativePanel>
-                        <StackPanel RelativePanel.AlignHorizontalCenterWithPanel="True"  RelativePanel.AlignVerticalCenterWithPanel="True" >
-                            <TextBlock HorizontalAlignment="Center" FontWeight="Bold" FontSize="38" Text="Gibbon VK" />
-                            <ToggleSwitch Header="Use Local Setting" IsOn="True" x:Name="localSettingSwitch"/>
-                            <Button Click="Button_Click" CornerRadius="8" Content="Login with Web" HorizontalAlignment="Center" Margin="16"/>
-                        </StackPanel>
-                    </RelativePanel>
-                    <Grid x:Name="WebPanel" Background="LightBlue" Visibility="Collapsed">
-                        <WebView x:Name="AuthWebView" LoadCompleted="AuthWebView_LoadCompleted"/>
-                    </Grid>
+        <Frame x:Name="Content">
+            <Grid>
+                <RelativePanel>
+                    <StackPanel RelativePanel.AlignHorizontalCenterWithPanel="True"  RelativePanel.AlignVerticalCenterWithPanel="True" >
+                        <TextBlock HorizontalAlignment="Center" FontWeight="Bold" FontSize="38" Text="Gibbon VK" />
+                        <ToggleSwitch Header="Use Local Setting" IsOn="True" x:Name="localSettingSwitch"/>
+                        <Button Click="Button_Click" CornerRadius="8" Content="Login with Web" HorizontalAlignment="Center" Margin="16"/>
+                    </StackPanel>
+                </RelativePanel>
+                <Grid x:Name="WebPanel" Background="LightBlue" Visibility="Collapsed">
+                    <WebView x:Name="AuthWebView" LoadCompleted="AuthWebView_LoadCompleted"/>
                 </Grid>
-            </Frame>
-        </NavigationView>
+            </Grid>
+        </Frame>
     </Grid>
 </Page>

@@ -1,8 +1,9 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace GibbonVk.Models
 {
-    public class ConversationsModel
+    public class ConversationsModel : INotifyPropertyChanged
     {
         public int PeerId { get; set; }
         public string Type { get; set; }
@@ -16,6 +17,12 @@ namespace GibbonVk.Models
         public string Photo100 { get; set; }
         public int Online { get; set; }
         public string FullName { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
     }
 }

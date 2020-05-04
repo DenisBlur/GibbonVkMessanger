@@ -63,7 +63,6 @@ namespace GibbonVk
                 {
                     _Token = localSettings.Values["main_token"].ToString();
                     _UserID = localSettings.Values["main_user_id"].ToString();
-                    NavView.IsPaneToggleButtonVisible = true;
                     Content.Navigate(typeof(MessagesPage), null, new DrillInNavigationTransitionInfo());
                 }
             }
@@ -78,7 +77,6 @@ namespace GibbonVk
             _Token = URL[1];
             _UserID = URL[5];
 
-            NavView.IsPaneToggleButtonVisible = true;
             Windows.Storage.ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
             localSettings.Values["main_token"] = _Token;
             localSettings.Values["main_user_id"] = _UserID;

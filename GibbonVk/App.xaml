@@ -150,19 +150,29 @@
                     </Ellipse>
                     <Grid>
                         <StackPanel>
-                            <Button Command="{Binding PlayAudioCommand}" CommandParameter="{Binding}">Голосове сообщение</Button>
+                            <TextBlock Margin="0,0,0,8" Text="Голосове сообщение"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Style="{StaticResource AccentButtonStyle}" Width="40" Height="40" Command="{Binding PlayAudioCommand}" CommandParameter="{Binding}">
+                                    <SymbolIcon Symbol="Play"/>
+                                </Button>
+                            </StackPanel>
                         </StackPanel>
                     </Grid>
                 </StackPanel>
             </Grid>
         </DataTemplate>
-        
+
         <DataTemplate x:Key="SelfAudioMessageDataTemplate">
             <Grid>
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                     <Grid>
                         <StackPanel>
-                            <Button Command="{Binding PlayAudioCommand}" CommandParameter="{Binding}">Голосове сообщение</Button>
+                            <TextBlock Margin="0,0,0,8" Text="Голосове сообщение"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Style="{StaticResource AccentButtonStyle}" Width="40" Height="40" Command="{Binding PlayAudioCommand}" CommandParameter="{Binding}">
+                                    <SymbolIcon Symbol="Play"/>
+                                </Button>
+                            </StackPanel>
                         </StackPanel>
                     </Grid>
                     <Ellipse VerticalAlignment="Bottom" Margin="8,0,0,0" Height="26" Width="26">
@@ -173,10 +183,122 @@
                 </StackPanel>
             </Grid>
         </DataTemplate>
+        <DataTemplate x:Key="ReplyMessageDataTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Ellipse VerticalAlignment="Bottom" Margin="0,0,8,0" Height="26" Width="26">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding imageUrl}" />
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Border CornerRadius="0" Background="{StaticResource SystemAccentColor}">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Margin="8" Height="30" Width="2" Fill="Gray"/>
+                            <TextBlock Margin="0,0,8,0" Text="{Binding replyMessage.text}" VerticalAlignment="Center"  Foreground="White"/>
+                        </StackPanel>
+                        <TextBlock MaxWidth="300" TextWrapping="Wrap" Margin="8" Foreground="White" FontWeight="Bold" Text="{Binding text}"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="ReplyPhotoMessageDataTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Ellipse VerticalAlignment="Bottom" Margin="0,0,8,0" Height="26" Width="26">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding imageUrl}" />
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Border CornerRadius="0" Background="{StaticResource SystemAccentColor}">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Margin="8" Height="30" Width="2" Fill="Gray"/>
+                            <Image Source="{Binding replyMessage.attachments[0].photo.sizes[0].url}" Stretch="UniformToFill" Width="30" Height="30"/>
+                            <TextBlock Margin="8,0,0,0" Text="{Binding replyMessage.attachments.Count}" VerticalAlignment="Center"  Foreground="White"/>
+                            <TextBlock Margin="0,0,8,0" Text=" Фотографий" VerticalAlignment="Center"  Foreground="White"/>
+                        </StackPanel>
+                        <TextBlock MaxWidth="300" TextWrapping="Wrap" Margin="8" Foreground="White" FontWeight="Bold" Text="{Binding text}"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="ReplyAudioMessageDataTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Ellipse VerticalAlignment="Bottom" Margin="0,0,8,0" Height="26" Width="26">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding imageUrl}" />
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Border CornerRadius="0" Background="{StaticResource SystemAccentColor}">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Margin="8" Height="30" Width="2" Fill="Gray"/>
+                            <TextBlock Margin="0,0,8,0" Text="Голосовое сообщение" VerticalAlignment="Center"  Foreground="White"/>
+                        </StackPanel>
+                        <TextBlock MaxWidth="300" TextWrapping="Wrap" Margin="8" Foreground="White" FontWeight="Bold" Text="{Binding text}"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="SelfReplyPhotoMessageDataTemplate">
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <Border CornerRadius="0" Background="{StaticResource SystemAccentColor}">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Margin="8" Height="30" Width="2" Fill="Gray"/>
+                            <Image Source="{Binding replyMessage.attachments[0].photo.sizes[0].url}" Stretch="UniformToFill" Width="30" Height="30"/>
+                            <TextBlock Margin="8,0,0,0" Text="{Binding replyMessage.attachments.Count}" VerticalAlignment="Center"  Foreground="White"/>
+                            <TextBlock Margin="0,0,8,0" Text=" Фотографий" VerticalAlignment="Center"  Foreground="White"/>
+                        </StackPanel>
+                        <TextBlock MaxWidth="300" TextWrapping="Wrap" Margin="8" Foreground="White" FontWeight="Bold" Text="{Binding text}"/>
+                    </StackPanel>
+                </Border>
+                <Ellipse VerticalAlignment="Bottom" Margin="8,0,0,0" Height="26" Width="26">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding imageUrl}" />
+                    </Ellipse.Fill>
+                </Ellipse>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="SelfReplyAudioMessageDataTemplate">
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <Border CornerRadius="0" Background="{StaticResource SystemAccentColor}">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Margin="8" Height="30" Width="2" Fill="Gray"/>
+                            <TextBlock Margin="0,0,8,0" Text="Голосовое сообщение" VerticalAlignment="Center"  Foreground="White"/>
+                        </StackPanel>
+                        <TextBlock MaxWidth="300" TextWrapping="Wrap" Margin="8" Foreground="White" FontWeight="Bold" Text="{Binding text}"/>
+                    </StackPanel>
+                </Border>
+                <Ellipse VerticalAlignment="Bottom" Margin="8,0,0,0" Height="26" Width="26">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding imageUrl}" />
+                    </Ellipse.Fill>
+                </Ellipse>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="SelfReplyMessageDataTemplate">
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <Border CornerRadius="0" Background="{StaticResource SystemAccentColor}">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Margin="8" Height="30" Width="2" Fill="Gray"/>
+                            <TextBlock Margin="0,0,8,0" Text="{Binding replyMessage.text}" VerticalAlignment="Center"  Foreground="White"/>
+
+                        </StackPanel>
+                        <TextBlock MaxWidth="300" TextWrapping="Wrap" Margin="8" Foreground="White" FontWeight="Bold" Text="{Binding text}"/>
+                    </StackPanel>
+                </Border>
+                <Ellipse VerticalAlignment="Bottom" Margin="8,0,0,0" Height="26" Width="26">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding imageUrl}" />
+                    </Ellipse.Fill>
+                </Ellipse>
+            </StackPanel>
+        </DataTemplate>
 
         <local:MessageItemDataTemplateSelector x:Key="MessageItemDataTemplateSelector"/>
     </Application.Resources>
-
-
 
 </Application>

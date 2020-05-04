@@ -17,48 +17,90 @@ namespace GibbonVk
             {
                 if ((item as HistoryModel).isSelf == false)
                 {
-                    if ((item as HistoryModel).attachmentsHistories != null)
+                    if ((item as HistoryModel).replyMessage != null)
                     {
-                        switch ((item as HistoryModel).attachmentsHistories[0].type)
+                        if ((item as HistoryModel).replyMessage.attachments.Count != 0)
                         {
-                            case "sticker":
-                                return App.Current.Resources["StickerMessageDataTemplate"] as DataTemplate;
-                            case "audio_message":
-                                return App.Current.Resources["AudioMessageDataTemplate"] as DataTemplate;
-                            case "photo":
-                                if ((item as HistoryModel).attachmentsHistories.Count > 1)
-                                {
-                                    return App.Current.Resources["PhotoGridMessageDataTemplate"] as DataTemplate;
-                                }
-                                else
-                                {
-                                    return App.Current.Resources["PhotoMessageDataTemplate"] as DataTemplate;
-                                }
-                            default: break;
-                        }
-                    } else return App.Current.Resources["MessageDataTemplate"] as DataTemplate;
-                } else
-                {
-                    if ((item as HistoryModel).attachmentsHistories != null)
-                    {
-                        switch ((item as HistoryModel).attachmentsHistories[0].type)
-                        {
-                            case "sticker":
-                                return App.Current.Resources["SelfStickerMessageDataTemplate"] as DataTemplate;
-                            case "audio_message":
-                                return App.Current.Resources["SelfAudioMessageDataTemplate"] as DataTemplate;
-                            case "photo":
-                                 if ((item as HistoryModel).attachmentsHistories.Count > 1)
-                                {
-                                  return  App.Current.Resources["SelfPhotoGridMessageDataTemplate"] as DataTemplate;
-                                } else
-                                {
-                                  return App.Current.Resources["SelfPhotoMessageDataTemplate"] as DataTemplate;
-                                }
-                            default: break;
-                        }
+                            switch ((item as HistoryModel).replyMessage.attachments[0].type)
+                            {
+                                case "photo": return App.Current.Resources["ReplyPhotoMessageDataTemplate"] as DataTemplate;
+                                case "audio_message": return App.Current.Resources["ReplyAudioMessageDataTemplate"] as DataTemplate;
+                            }
+                        } else return App.Current.Resources["ReplyMessageDataTemplate"] as DataTemplate;
                     }
-                    else return App.Current.Resources["SelfMessageDataTemplate"] as DataTemplate;
+                    else
+                    {
+                        if ((item as HistoryModel).attachmentsHistories != null)
+                        {
+                            switch ((item as HistoryModel).attachmentsHistories[0].type)
+                            {
+                                case "sticker":
+                                    return App.Current.Resources["StickerMessageDataTemplate"] as DataTemplate;
+                                case "audio_message":
+                                    return App.Current.Resources["AudioMessageDataTemplate"] as DataTemplate;
+                                case "photo":
+                                    if ((item as HistoryModel).attachmentsHistories.Count > 1)
+                                    {
+                                        return App.Current.Resources["PhotoGridMessageDataTemplate"] as DataTemplate;
+                                    }
+                                    else
+                                    {
+                                        return App.Current.Resources["PhotoMessageDataTemplate"] as DataTemplate;
+                                    }
+                                default: break;
+                            }
+                        }
+                        else return App.Current.Resources["MessageDataTemplate"] as DataTemplate;
+                    }
+                }
+
+
+
+
+
+
+
+
+
+
+                else
+                {
+                    if ((item as HistoryModel).replyMessage != null)
+                    {
+                        if ((item as HistoryModel).replyMessage.attachments.Count != 0)
+                        {
+                            switch ((item as HistoryModel).replyMessage.attachments[0].type)
+                            {
+                                case "photo": return App.Current.Resources["SelfReplyPhotoMessageDataTemplate"] as DataTemplate;
+                                case "audio_message": return App.Current.Resources["SelfReplyAudioMessageDataTemplate"] as DataTemplate;
+                            }
+                        }
+                        else return App.Current.Resources["SelfReplyMessageDataTemplate"] as DataTemplate;
+                    }
+                    else
+                    {
+                        if ((item as HistoryModel).attachmentsHistories != null)
+                        {
+                            switch ((item as HistoryModel).attachmentsHistories[0].type)
+                            {
+                                case "sticker":
+                                    return App.Current.Resources["SelfStickerMessageDataTemplate"] as DataTemplate;
+                                case "audio_message":
+                                    return App.Current.Resources["SelfAudioMessageDataTemplate"] as DataTemplate;
+                                case "photo":
+                                    if ((item as HistoryModel).attachmentsHistories.Count > 1)
+                                    {
+                                        return App.Current.Resources["SelfPhotoGridMessageDataTemplate"] as DataTemplate;
+                                    }
+                                    else
+                                    {
+                                        return App.Current.Resources["SelfPhotoMessageDataTemplate"] as DataTemplate;
+                                    }
+                                default: break;
+                            }
+                        }
+                        else return App.Current.Resources["SelfMessageDataTemplate"] as DataTemplate;
+                    }
                 }
             }
             return null;

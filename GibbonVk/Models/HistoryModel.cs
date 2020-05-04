@@ -34,6 +34,7 @@ namespace GibbonVk.Models
         public string text { get; set; }
         public string imageUrl { get; set; }
         public bool isSelf { get; set; }
+        public ReplyMessage replyMessage { get; set; }
         public List<AttachmentsHistory> attachmentsHistories { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
