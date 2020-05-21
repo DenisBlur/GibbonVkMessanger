@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,7 +44,7 @@ namespace GibbonVk.Models
         public int date { get; set; }
         public string post_type { get; set; }
         public string text { get; set; }
-        public List<AttachmentsHistory> attachments { get; set; }
+        public ObservableCollection<AttachmentsHistory> attachments { get; set;}
     }
 
     public class VideoHistory
@@ -59,16 +60,37 @@ namespace GibbonVk.Models
         public string description { get; set; }
         public int duration { get; set; }
         public List<SizesPhotosHistory> image { get; set; }
+        public int id { get; set; }
+        public int owner_id { get; set; }
+        public string title { get; set; }
+        public int repeat { get; set; }
+        public int views { get; set; }
     }
 
-    public class AttachmentsHistory
+    public class AudioHistory
     {
-        public string type { get; set; }
-        public StickerHistory sticker { get; set; }
-        public PhotoHistory photo { get; set; }
-        public AudioMessageHistory audio_message { get; set; }
-        public WallHistory wall { get; set; }
-        public VideoHistory video { get; set; }
+        public string artist { get; set; }
+        public int id { get; set; }
+        public int owner_id { get; set; }
+        public string title { get; set; }
+        public int duration { get; set; }
+        public string track_code { get; set; }
+        public string url { get; set; }
+        public int date { get; set; }
+        public int genre_id { get; set; }
+    }
+
+    public class DocHistory
+    {
+        public int id { get; set; }
+        public int owner_id { get; set; }
+        public string title { get; set; }
+        public int size { get; set; }
+        public string ext { get; set; }
+        public string url { get; set; }
+        public int date { get; set; }
+        public int type { get; set; }
+        public string access_key { get; set; }
     }
 
     public class ReplyMessage
@@ -76,7 +98,7 @@ namespace GibbonVk.Models
         public int date { get; set; }
         public int from_id { get; set; }
         public string text { get; set; }
-        public List<AttachmentsHistory> attachments { get; set; }
+        public ObservableCollection<AttachmentsHistory> attachments { get; set; }
     }
 
     public class ItemHistory
@@ -87,7 +109,7 @@ namespace GibbonVk.Models
         public int peer_id { get; set; }
         public string text { get; set; }
         public int conversation_message_id { get; set; }
-        public List<AttachmentsHistory> attachments { get; set; }
+        public ObservableCollection<AttachmentsHistory> attachments { get; set; }
         public ReplyMessage reply_message { get; set; }
     }
 

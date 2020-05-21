@@ -6,9 +6,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:vm="using:GibbonVk.ViewModel"
     Loaded="Page_Loaded"
+    x:Name="rootElement"
     xmlns:local="using:GibbonVk.Models"
     Background="{ThemeResource SystemControlAcrylicWindowMediumHighBrush}">
+
     <Page.Resources>
         <ThemeShadow x:Name="ShadowTheme"/>
     </Page.Resources>
@@ -44,6 +47,7 @@
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF716;" FontSize="40"/>
                 <TextBlock Text="Выберите диалог" Margin="8" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button Content="Transition" Command="{Binding DataContext.GoToFriendCommand, ElementName=rootElement}" CommandParameter="{Binding}"/>
             </StackPanel>
         </Frame>
         <Grid Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Stretch" x:Name="AppTitleBar" Background="Transparent">

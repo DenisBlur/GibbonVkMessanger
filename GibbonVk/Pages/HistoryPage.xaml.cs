@@ -35,6 +35,11 @@ namespace GibbonVk.Pages
             this.InitializeComponent();
         }
 
+        private void VisibilityMain(int id)
+        {
+
+        }
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);

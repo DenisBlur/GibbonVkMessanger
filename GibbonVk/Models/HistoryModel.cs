@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -35,7 +36,7 @@ namespace GibbonVk.Models
         public string imageUrl { get; set; }
         public bool isSelf { get; set; }
         public ReplyMessage replyMessage { get; set; }
-        public List<AttachmentsHistory> attachmentsHistories { get; set; }
+        public ObservableCollection<AttachmentsHistory> attachmentsHistories { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(string propertyName)

@@ -96,6 +96,10 @@ namespace GibbonVk.Pages
                 foreach (List<object> update in LongPollServerAnswer.ElementAt(0).updates)
                 {
                     Debug.WriteLine(update.ElementAt(0).ToString());
+                    if (Convert.ToInt32(update.ElementAt(0)) == 61)
+                    {
+                        Debug.WriteLine("Он " + update.ElementAt(1).ToString() + " набирает сообщение");
+                    }
                     if (Convert.ToInt32(update.ElementAt(0)) == 4)
                     {
                         //if (currentFriendID == update.ElementAt(3).ToString())
@@ -115,7 +119,7 @@ namespace GibbonVk.Pages
                         //        history.imageUrl = currentFriendPhoto;
                         //    }
                         //    historyModels.Add(history);
-                            
+
                         //}
                         for (int i = 0; i < conversationsModels.Count(); i++)
                         {
@@ -194,7 +198,14 @@ namespace GibbonVk.Pages
             friendList = (ConversationsModel)item.SelectedItem;
             if (friendList != null)
             {
-                MessageFrame.Navigate(typeof(HistoryPage), friendList, new DrillInNavigationTransitionInfo());
+                if (MessageFrame.CanGoBack)
+                {
+                    MessageFrame.GoBack();
+                    MessageFrame.Navigate(typeof(HistoryPage), friendList, new DrillInNavigationTransitionInfo());
+                } else
+                {
+                    MessageFrame.Navigate(typeof(HistoryPage), friendList, new DrillInNavigationTransitionInfo());
+                }
             }
 
         }
